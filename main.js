@@ -21,7 +21,7 @@ function sentiment_analysis(ele) {
     if(event.key === 'Enter') {        
       var sentimood = new Sentimood();
       var analysis = sentimood.analyze(ele.value);
-      console.log(analysis.score);
+      // console.log(analysis.score);
       current_score = analysis.score;
       add_to_database(ele.value, current_score);
       get_counter_feeling_sentence(current_score);      
@@ -84,12 +84,12 @@ function gotData(data) {
     var key = keys[i];
     // Look at each fruit object!
     var sentence = sentences[key];
-    console.log(sentence);
-    console.log( Math.abs( -1 * current_score - sentence.score ) );
+    // console.log(sentence);
+    // console.log( Math.abs( -1 * current_score - sentence.score ) );
 
     if( Math.abs( -1 * current_score - sentence.score ) <= closest_value_of_anti_feeling )
     {
-      console.log(" ---- " + sentence.score )
+      // console.log(" ---- " + sentence.score )
       closest_value_of_anti_feeling = Math.abs( -1 * current_score - sentence.score );
       closest_index_of_anti_feeling = key;
     }
@@ -97,7 +97,7 @@ function gotData(data) {
   }
 
 
-  console.log(  sentences[ closest_index_of_anti_feeling].sentence );   // write this on the input form
+  // console.log(  sentences[ closest_index_of_anti_feeling].sentence );   // write this on the input form
   result_sentence = sentences[ closest_index_of_anti_feeling].sentence;
 
 
