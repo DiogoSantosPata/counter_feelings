@@ -23,7 +23,7 @@ function sentiment_analysis(ele) {
       var analysis = sentimood.analyze(ele.value);
       console.log(analysis.score);
       current_score = analysis.score;
-      // add_to_database(ele.value, current_score);
+      add_to_database(ele.value, current_score);
       get_counter_feeling_sentence(current_score);      
     }
 
