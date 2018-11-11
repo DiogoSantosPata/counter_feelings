@@ -1,0 +1,114 @@
+<html>
+
+
+<head>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="sentimood.js"></script>
+
+
+	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+	<script src="main.js"></script>
+
+</head>
+
+
+<style>
+
+:root {
+    --main-bg-color: coral; 
+}
+
+body {
+
+	background-color:var(--main-bg-color);
+}
+
+
+.form-control {  
+  font-size: 50;
+  height:60px;
+  font-weight:bold;
+  background-color: var(--main-bg-color);
+  color: white;
+}
+
+
+.form-control:focus {  
+  border: none;
+  box-shadow: none;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+
+#text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+
+.form-control::-webkit-input-placeholder { color: white; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: white; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: white; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: white; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: white; }  /* Microsoft Edge */
+I
+
+
+</style>
+
+
+
+<body>
+ 
+	<div class="container vertical-center" id="parent_container">
+		<input class="form-control form-control-lg" type="text" id="input_feelings" placeholder="write your feelings here..." autofocus
+		 onkeydown="sentiment_analysis(this)" >
+
+		 <p id="resulting_sentence" style="position: absolute; top: 50%; left: 50%; color: white; transform: translate(-50%,-50%);
+    		-ms-transform: translate(-50%,-50%); font-size: 50; height:60px; font-weight:bold; " ></p>
+	</div>
+
+
+
+
+
+</body>
+</html>
+
+
