@@ -14,7 +14,6 @@
 
 	<script src="sentimood.js"></script>
 
-
 	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
 	<script src="main.js"></script>
 
@@ -107,31 +106,24 @@ I
 
 
 
-
-
- <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Counter feelings</h4>
-        </div>
-        <div class="modal-body">
-          <p>Write a feeling and press ENTER. It will return the opposite of that, taken from what others have been writing.</p>
-          <p>Your feelings will be stored and retrieved to other users in the future.</p>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Counter feelings</h4>
+          </div>
+          <div class="modal-body">
+            <p>Write a feeling and press ENTER. It will return the opposite of that, taken from what others have been writing.</p>
+            <p>Your feelings will be stored and retrieved to other users in the future.</p>
+          </div>
+          
         </div>
         
       </div>
-      
     </div>
-  </div>
-
-
-
-
 
 
 
@@ -140,11 +132,7 @@ I
 		<input class="form-control form-control-lg" type="text" id="input_feelings" placeholder="How do you feel?" autofocus
 		 onkeydown="sentiment_analysis(this)" >
 
-		 <p id="resulting_sentence" style="position: absolute; top: 50%; left: 50%; color: white; transform: translate(-50%,-50%);
-    		-ms-transform: translate(-50%,-50%); font-size: 50; height:60px; font-weight:bold; " ></p>
 	</div>
-
-
 
 
 
