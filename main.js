@@ -18,13 +18,18 @@ var current_score;
 
 function sentiment_analysis(ele) {
 
-    if(event.key === 'Enter') {        
-      var sentimood = new Sentimood();
-      var analysis = sentimood.analyze(ele.value);      
-      current_score = analysis.score;
-      add_to_database(ele.value, current_score);
-      get_counter_feeling_sentence(current_score);      
+    if(event.key === 'Enter') {
+
+      if(ele.value.length > 0) {
+
+        var sentimood = new Sentimood();
+        var analysis = sentimood.analyze(ele.value);      
+        current_score = analysis.score;
+        add_to_database(ele.value, current_score);
+        get_counter_feeling_sentence(current_score);      
     }
+
+  }
 
 }
 
@@ -59,9 +64,16 @@ function gotData(data) {
   var keys = Object.keys(sentences); // Grab the keys to iterate over the object
 
 
+
+  var a = [];
+  for(i=0; i<keys.length;i++){ a.push(i); }
+  a = shuffle(a);
+
+
+
   // Find the stored sentences with closest negative feeling. e.g. if user inputs a 3 scored sentence, we want to get back a -3
   for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];    
+    var key = keys[ a[i] ];    
     var sentence = sentences[key];
     
     if( Math.abs( -1 * current_score - sentence.score ) <= closest_value_of_anti_feeling )
@@ -93,3 +105,16 @@ function add_to_database(input_string, input_score){
 }
 
 
+
+
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
