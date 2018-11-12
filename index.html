@@ -94,8 +94,11 @@ body {
 .form-control::-moz-placeholder { color: white; }  /* Mozilla Firefox 19+ */
 .form-control:-ms-input-placeholder { color: white; }  /* Internet Explorer 10-11 */
 .form-control::-ms-input-placeholder { color: white; }  /* Microsoft Edge */
-I
 
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: var(--main-bg-color) !important;   border:none;  outline: none;
+}
 
 </style>
 
@@ -107,7 +110,7 @@ I
 
     <div class='btn-toolbar pull-right'>
       <div class='btn-group'>
-        <button type='button' class='btn btn-light' data-toggle="modal" data-target="#myModal">HELP</button>
+        <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#myModal">HELP</button>
       </div>
     </div>  
 
