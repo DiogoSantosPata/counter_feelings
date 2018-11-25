@@ -39,12 +39,35 @@ body {
 	background-color:var(--main-bg-color);
 }
 
+.gradient-animation {
+  
+	width: 100vw;
+	height: 100vh;
+	color: #fff;
+	background: linear-gradient(-45deg, #EA1E63, #9C28B1, #673BB7, #3F51B5, #2096F3, #04A9F5, #01BCD5, #009688,#4CB050, #8BC24A, #CDDC39,#FFEB3C,#FEC108, #FF9700, #FE5723);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 120s linear infinite;
+	-moz-animation: Gradient 120s linear infinite;
+	animation: Gradient 120s linear infinite;
+
+}
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
 
 .form-control {  
   font-size: 50;
   height:110px;
   font-weight:bold;
-  background-color: var(--main-bg-color);
+  background: transparent;
   color: white;
 }
 
@@ -97,14 +120,14 @@ body {
 
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: var(--main-bg-color) !important;   border:none;  outline: none;
+    background: transparent; color: white; border:1px dashed white;    outline: none;
 }
 
 </style>
 
 
 
-<body>
+<body class="gradient-animation">
 
 
 

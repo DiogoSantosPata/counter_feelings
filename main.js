@@ -57,7 +57,6 @@ function errData(err) {
 
 
 function gotData(data) {
-
   var closest_value_of_anti_feeling = 10000;
   var closest_index_of_anti_feeling;
   var sentences = data.val();
