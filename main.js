@@ -11,109 +11,56 @@ firebase.initializeApp(config);
 
 
 var database = firebase.database();  // create global firebase database object
+var textbox = document.getElementById('textbox');
 
-var current_score;
-
-
-
-function sentiment_analysis(ele) {
-
-    if(event.key === 'Enter') {
-
-      if(ele.value.length > 0) {
-
-        var sentimood = new Sentimood();
-        var analysis = sentimood.analyze(ele.value);      
-        current_score = analysis.score;
-        add_to_database(ele.value, current_score);
-        get_counter_feeling_sentence(current_score);      
-    }
-
+textbox.onkeydown = function(e) {
+  if (e.keyCode === 13 && textbox.value.length) {
+      var userSentence = textbox.value;
+      var rating = calcRating(userSentence)
+      var counterRating = calcCounterRating(rating);
+      addToDB(userSentence, rating);
+      getCounterRatingSentence(counterRating, updateTextbox);
   }
-
 }
 
 
+function calcRating(sentence) {
+  var sentimood = new Sentimood();
+   return sentimood.analyze(sentence).score;      
+}
 
+function calcCounterRating(rating) {
+  return - rating;
+}
 
-function addElement(result_sentence) {  
-    document.getElementById("input_feelings").value="";
-    document.getElementById("input_feelings").placeholder=result_sentence;
+function updateTextbox(sentence) {
+  textbox.value='';
+  textbox.placeholder = sentence;
 }
 
 
-
-function get_counter_feeling_sentence(current_score){
-  var ref = database.ref("sentences");
-  ref.on("value", gotData, errData);  
+function getCounterRatingSentence(counterRating, cb){
+  var ref = database.ref("sentences").orderByChild('score').equalTo(counterRating)
+  ref.once('value').then(function(snapshot) {
+    var counterSentences = _.toArray(snapshot.val());
+    randomIndex = Math.floor( Math.random() * (counterSentences.length - 1) );
+    cb(counterSentences[randomIndex].sentence);
+    //cb is a callback function, meaning that is the function that will be executed asynchronously, 
+    //as soon as we fetch the data from firebase
+    //in this case we wanna update the DOM, so we pass "updateTextbox" as a callback 
+  }); 
 }
 
 
-
-function errData(err) {
-  console.log(err);
-}
-
-
-
-function gotData(data) {
-  var closest_value_of_anti_feeling = 10000;
-  var closest_index_of_anti_feeling;
-  var sentences = data.val();
-  var keys = Object.keys(sentences); // Grab the keys to iterate over the object
-
-
-
-  var a = [];
-  for(i=0; i<keys.length;i++){ a.push(i); }
-  a = shuffle(a);
-
-
-
-  // Find the stored sentences with closest negative feeling. e.g. if user inputs a 3 scored sentence, we want to get back a -3
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[ a[i] ];    
-    var sentence = sentences[key];
-    
-    if( Math.abs( -1 * current_score - sentence.score ) <= closest_value_of_anti_feeling )
-    {
-      closest_value_of_anti_feeling = Math.abs( -1 * current_score - sentence.score );
-      closest_index_of_anti_feeling = key;
-    }
-
-  }
-
-  result_sentence = sentences[ closest_index_of_anti_feeling].sentence;
-  addElement(result_sentence);
-
-}
-
-
-
-function add_to_database(input_string, input_score){
+function addToDB(userSentence, rating){
 
   var sentences = database.ref('sentences');  // create database reference
-
   var data = {  // format data
-    sentence: input_string,
-    score: input_score
+    sentence: userSentence,
+    score: rating
   }
 
   sentences.push(data);  // push data to the database
 
 }
 
-
-
-
-
-function shuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-    }
-    return a;
-}

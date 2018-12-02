@@ -23,7 +23,10 @@ git push origin master
 	<script src="sentimood.js"></script>
 
 	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-	<script src="main.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.core.js"></script>
+
+  
 
 </head>
 
@@ -163,13 +166,12 @@ body {
 
  
 	<div class="container vertical-center" id="parent_container">
-		<input class="form-control form-control-lg" type="text" id="input_feelings" placeholder="Write a sentence describing how you feel..." autofocus
-		 onkeydown="sentiment_analysis(this)" >
+		<input class="form-control form-control-lg" type="text" id="textbox" placeholder="Write a sentence describing how you feel..." autofocus>
 
 	</div>
 
 
-
+  <script src="main.js"></script>
 </body>
 </html>
 
